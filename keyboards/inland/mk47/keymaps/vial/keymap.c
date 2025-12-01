@@ -61,12 +61,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 static int colors[][3] = {
 	{-1, -1, -1},
-	{RGB_CYAN},
 	{RGB_BLUE},
-	{RGB_YELLOW},
 	{RGB_GREEN},
-	{RGB_RED}
+	{RGB_RED},
+	{RGB_CYAN},
+	{RGB_YELLOW},
 };
+
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     int active = get_highest_layer(layer_state|default_layer_state);
