@@ -91,3 +91,29 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+#ifdef RGB_MATRIX_ENABLE
+
+static int colors[][3] = {
+   {-1, -1, -1},
+   {RGB_BLUE},
+   {-1, -1, -1},
+   {RGB_BLUE},
+   {RGB_GREEN},
+   {RGB_RED},
+};
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    int active = get_highest_layer(layer_state|default_layer_state);
+    int *color = colors[active];
+
+    if(color[0] == -1)
+       return true;
+
+    for (uint8_t i = led_min; i < led_max-10; i++) {
+       rgb_matrix_set_color(i, color[0], color[1], color[2]);
+    }
+
+    return false;
+}
+
+#endif
