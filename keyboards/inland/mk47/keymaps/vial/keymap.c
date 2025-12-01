@@ -68,7 +68,6 @@ static int colors[][3] = {
 	{RGB_YELLOW},
 };
 
-
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     int active = get_highest_layer(layer_state|default_layer_state);
     int *color = colors[active];
