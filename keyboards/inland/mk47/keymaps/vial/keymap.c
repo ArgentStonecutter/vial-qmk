@@ -57,3 +57,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+#ifdef RGB_MATRIX_ENABLE
+
+static int colors[][3] = {
+	{-1, -1, -1},
+	{RGB_CYAN},
+	{RGB_BLUE},
+	{RGB_YELLOW},
+	{RGB_GREEN},
+	{RGB_RED}
+};
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    int active = get_highest_layer(layer_state|default_layer_state);
+    int *color = colors[active];
+
+    if(color[0] == -1)
+	return true;
+
+    for (uint8_t i = led_min; i < led_max; i++) {
+	rgb_matrix_set_color(i, color[0], color[1], color[2]);
+    }
+
+    return false;
+}
+
+#endif
