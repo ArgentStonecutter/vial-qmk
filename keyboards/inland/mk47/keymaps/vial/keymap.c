@@ -60,12 +60,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef RGB_MATRIX_ENABLE
 
 static int colors[][3] = {
-	{-1, -1, -1},
-	{RGB_BLUE},
-	{RGB_GREEN},
-	{RGB_RED},
-	{RGB_CYAN},
-	{RGB_YELLOW},
+    {-1, -1, -1},
+    {RGB_BLUE},
+    {RGB_GREEN},
+    {RGB_RED},
+    {RGB_CYAN},
+    {RGB_YELLOW},
 };
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -74,27 +74,27 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     // Ignore default layers
     if(act == def)
-	return true;
+        return true;
 
     int *color = colors[act];
 
     // Ignore the special color -1, -1, -1
     if(color[0] == -1)
-	return true;
+        return true;
 
     // Walk the matrix
     for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
         for (uint8_t col = 0; col < MATRIX_COLS; col++) {
             // Ignore special keys (KC_NO, KC_TRNS, etc)
             uint16_t code = keymap_key_to_keycode(act, (keypos_t){col,row});
-	    if (IS_INTERNAL_KEYCODE(code))
+            if (IS_INTERNAL_KEYCODE(code))
                 continue;
 
             // Look up the LED
-	    uint8_t index = g_led_config.matrix_co[row][col];
+            uint8_t index = g_led_config.matrix_co[row][col];
 
             // Ignore LEDs that aren't actually LEDs
-	    if (index < led_min || index >= led_max || index == NO_LED)
+            if (index < led_min || index >= led_max || index == NO_LED)
                 continue;
 
             // Set the color
