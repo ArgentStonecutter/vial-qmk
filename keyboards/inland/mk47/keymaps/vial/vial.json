@@ -1,6 +1,13 @@
 {
     "lighting": "vialrgb",
     "matrix": { "rows": 4, "cols": 12 },
+    "customKeycodes": [
+        {
+            "name": "CF Toggle",
+            "title": "Color Function Toggle",
+            "shortName": "CF\nTOGG"
+        }
+    ],
     "layouts": {
       "keymap":[
         [

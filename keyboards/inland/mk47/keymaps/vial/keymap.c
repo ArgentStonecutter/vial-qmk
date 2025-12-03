@@ -16,6 +16,10 @@
 
 #include QMK_KEYBOARD_H
 
+enum cf_keycode {
+    CF_TOGGLE = QK_KB_0,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -38,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_NO, KC_LALT, KC_DEL, KC_PGDN, KC_SPC, KC_PGUP, KC_NO, KC_LEFT, KC_DOWN, KC_RGHT),
 
     [3] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, CF_TOGGLE,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
@@ -59,6 +63,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef RGB_MATRIX_ENABLE
 
+static uint8_t cf_magic = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CF_TOGGLE:
+            if (record->event.pressed)
+                cf_magic = !cf_magic;
+            return false;
+    }
+
+    return true;
+}
+
 static int colors[][3] = {
     {-1, -1, -1},
     {RGB_BLUE},
@@ -69,6 +86,9 @@ static int colors[][3] = {
 };
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (!cf_magic)
+        return true;
+
     int act = get_highest_layer(layer_state);
     int def = get_highest_layer(default_layer_state);
 
