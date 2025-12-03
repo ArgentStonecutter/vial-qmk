@@ -110,11 +110,22 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if(act == def)
         return true;
 
-    int *color = colors[act];
+    int *color_p = colors[act];
 
     // Ignore the special color -1, -1, -1
-    if(color[0] == -1)
+    if(color_p[0] == -1)
         return true;
+
+    // Scale color to brightness level;
+    int color[3];
+    uint8_t rgb_val = rgblight_get_val();
+    for (int i = 0; i < 3; i++) {
+        int level = color_p[i];
+        level *= rgb_val;
+        level >>= 8;
+
+        color[i] = level;
+    }
 
     // Walk the matrix
     for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
