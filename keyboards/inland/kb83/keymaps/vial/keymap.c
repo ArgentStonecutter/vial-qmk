@@ -25,6 +25,10 @@ enum __layers {
     X_SYS
 };
 
+enum cf_keycode {
+    CF_TOGGLE = QK_KB_0,
+};
+
 #define KC_TASK LGUI(KC_TAB)
 #define KC_FLXP LGUI(KC_E)
 #define KC_SIRI LALT(KC_SPC)
@@ -40,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                             KC_RALT, MO(WIN_FN),KC_RCTL,    KC_LEFT,  KC_DOWN, KC_RGHT),
 
     [WIN_FN] = LAYOUT( /* FN */
-		_______, KC_BRID, KC_BRIU, KC_MAIL, KC_WSCH, KC_CALC, KC_MSEL, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, _______,       RM_TOGG, 
+		_______, KC_BRID, KC_BRIU, KC_MAIL, KC_WSCH, KC_CALC, KC_MSEL, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, CF_TOGGLE,     RM_TOGG, 
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RM_NEXT,       _______, 
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,       RM_HUEU, 
 		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                RM_HUED, 
@@ -93,16 +97,32 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 #ifdef RGB_MATRIX_ENABLE
 
+static uint8_t cf_magic = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CF_TOGGLE:
+            if (record->event.pressed)
+                cf_magic = !cf_magic;
+            return false;
+    }
+
+    return true;
+}
+
 static int colors[][3] = {
-   {-1, -1, -1},
-   {RGB_BLUE},
-   {-1, -1, -1},
-   {RGB_BLUE},
-   {RGB_GREEN},
-   {RGB_RED},
+    {-1, -1, -1},
+    {RGB_BLUE},
+    {-1, -1, -1},
+    {RGB_BLUE},
+    {RGB_GREEN},
+    {RGB_RED},
 };
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (!cf_magic)
+        return true;
+
     int act = get_highest_layer(layer_state);
     int def = get_highest_layer(default_layer_state);
 

@@ -7,6 +7,13 @@
         "cols": 16
     },
     "lighting": "vialrgb",
+    "customKeycodes": [
+        {
+            "name": "CF Toggle",
+            "title": "Color Function Toggle",
+            "shortName": "CF\nTOGG"
+        }
+    ],
     "layouts": {
         "labels": [
             [
