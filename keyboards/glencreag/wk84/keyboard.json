@@ -184,7 +184,7 @@
     },
     "url": "",
     "usb": {
-        "device_version": "0.1.5",
+        "device_version": "0.1.6",
         "pid": "0xE417",
         "vid": "0x342D"
     },

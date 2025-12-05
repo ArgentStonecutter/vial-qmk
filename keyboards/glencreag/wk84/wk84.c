@@ -1,4 +1,4 @@
-/* Copyright 2024 GSKY <gskyGit@gsky.com.tw>
+/* Copyright 2025 GSKY <gskyGit@gsky.com.tw>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef EEPROM_ENABLE
-
-#include "spi_master.h"
-
-void spi_init(void) {
-    static bool is_initialised = false;
-    if (!is_initialised) {
-        is_initialised = true;
-
-        // Try releasing special pins for a short time
-        gpio_set_pin_input(SPI_SCK_PIN);
-        gpio_set_pin_input(SPI_MOSI_PIN);
-        gpio_set_pin_input(SPI_MISO_PIN);
-
-        chThdSleepMilliseconds(10);
-
-        palSetPadMode(PAL_PORT(SPI_SCK_PIN), PAL_PAD(SPI_SCK_PIN), PAL_MODE_ALTERNATE(SPI_SCK_PAL_MODE) | PAL_OUTPUT_TYPE_PUSHPULL | PAL_OUTPUT_SPEED_HIGHEST | PAL_WB32_CURRENT_LEVEL3);
-        palSetPadMode(PAL_PORT(SPI_MOSI_PIN), PAL_PAD(SPI_MOSI_PIN), PAL_MODE_ALTERNATE(SPI_MOSI_PAL_MODE) | PAL_OUTPUT_TYPE_PUSHPULL | PAL_OUTPUT_SPEED_HIGHEST);
-        palSetPadMode(PAL_PORT(SPI_MISO_PIN), PAL_PAD(SPI_MISO_PIN), PAL_MODE_ALTERNATE(SPI_MISO_PAL_MODE) | PAL_OUTPUT_TYPE_PUSHPULL | PAL_OUTPUT_SPEED_HIGHEST);
-    }
-}
-
-#endif
+#include "quantum.h"
 
 void keyboard_pre_init_kb(void) {
-    setPinOutput(B13);
-    writePinHigh(B13);
+    // WS2812 POWER PIN ENABLE
+    gpio_set_pin_output(B13);
+    gpio_write_pin_high(B13);
+    
+    keyboard_pre_init_user();
 }
