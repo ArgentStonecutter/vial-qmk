@@ -3,13 +3,8 @@
     "keyboard_name": "WK84",
     "maintainer": "Gsky",
     "bootloader": "wb32-dfu",
-    "debounce": 1,
     "diode_direction": "ROW2COL",
-    "dynamic_keymap": {
-        "layer_count": 4
-    },
     "eeprom": {
-        "driver": "wear_leveling",
         "wear_leveling": {
             "backing_size": 4096,
             "driver": "spi_flash"
@@ -17,12 +12,10 @@
     },
     "features": {
         "bootmagic": true,
-        "command": false,
-        "console": false,    
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "rgb_matrix": true,     
+        "rgb_matrix": true
     },
     "matrix_pins": {
         "cols": ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "C12", "A15", "B10", "B11", "A10", "A9", "C8", "C5"],
@@ -82,7 +75,9 @@
             "splash": true,
             "typing_heatmap": true
         },
-        "center_point": [77, 30],
+        "default": {          
+            "speed": 195           
+        },
         "driver": "ws2812",
         "layout": [
             {"matrix": [5, 4], "x": 37, "y": 50, "flags": 4},
@@ -170,19 +165,10 @@
             {"matrix": [0, 14], "x": 140, "y": 0, "flags": 4},
             {"matrix": [0, 15], "x": 150, "y": 0, "flags": 4}
         ],
-        "react_on_keyup": true,
-        "led_count": 84,
         "max_brightness": 160,
-        "default":{
-            "sat": 255,
-            "val": 160,
-            "speed": 195
-        },
-        "val_steps": 40,
-        "speed_steps": 60,
+        "react_on_keyup": true,
         "sleep": true
     },
-    "url": "",
     "usb": {
         "device_version": "0.1.6",
         "pid": "0xE417",

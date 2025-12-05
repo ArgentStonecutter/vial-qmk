@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Westberry Technology (ChangZhou) Corp., Ltd
+/* Copyright (C) 2025 Westberry Technology (ChangZhou) Corp., Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,5 @@
 #pragma once
 
 #define HAL_USE_SPI TRUE
-#define SPI_USE_WAIT TRUE
-#define SPI_SELECT_MODE SPI_SELECT_MODE_PAD
 
 #include_next <halconf.h>

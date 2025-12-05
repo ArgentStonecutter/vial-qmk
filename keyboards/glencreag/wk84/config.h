@@ -1,4 +1,4 @@
-/* Copyright 2024 GSKY <gskyGit@gsky.com.tw>
+/* Copyright 2025 GSKY <gskyGit@gsky.com.tw>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,11 +25,9 @@
 #define SPI_MOSI_PIN A7
 #define SPI_MISO_PIN A6
 
-/* RGB Matrix */
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_STARTUP_MODE 13
-#define RGB_TRIGGER_ON_KEYDOWN
-
 /* WS2812 */
 #define WS2812_SPI_DRIVER SPIDM2
-#define WS2812_SPI_DIVISOR 16
+
+#define NKRO_DEFAULT_ON 1
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6

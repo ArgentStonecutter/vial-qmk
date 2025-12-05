@@ -1,2 +1,4 @@
 VIAL_ENABLE=yes
 VIA_ENABLE = yes
+
+VIALRGB_ENABLE = yes
