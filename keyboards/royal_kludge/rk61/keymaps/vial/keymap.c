@@ -136,14 +136,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
         }
     }
-
-    if (layer_state_is(LWIN_DIS)) {
-        rgb_matrix_set_color(59, 255, 255, 255);
-    } else {
-        if (!rgb_matrix_get_flags()) {
-            rgb_matrix_set_color(59, 0, 0, 0);
-        }
-    }
 #endif
 
     if (!cf_magic)
