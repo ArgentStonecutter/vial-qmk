@@ -2,16 +2,16 @@
 
 Experimental VIAL configuration and improved keymap
 
-image
+<img width="1006" height="290" alt="keyboard-layout" src="layout.png" />
 
-Layer 0 - Windows
-Layer 1 - Windows navigation/function keys
-Layer 2 - Windows backlight control
-Layer 3 - Windows media control
-Layer 4 - Mac
-Layer 5 - Mac navigation/function keys
-Layer 6 - Mac backlight control
-Layer 7 - Mac media control
+Layer 0 - Windows<br>
+Layer 1 - Windows navigation/function keys<br>
+Layer 2 - Windows backlight control<br>
+Layer 3 - Windows media control<br>
+Layer 4 - Mac<br>
+Layer 5 - Mac navigation/function keys<br>
+Layer 6 - Mac backlight control<br>
+Layer 7 - Mac media control<br>
 
 ## Color Function Layers
 
