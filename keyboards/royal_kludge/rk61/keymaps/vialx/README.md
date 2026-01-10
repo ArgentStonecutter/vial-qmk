@@ -17,6 +17,8 @@ Layer 7 - Mac media control<br>
 
 When CF Toggle is active, then the available function keys on any layer will be visible when the function key is held.
 
+## Building
+
 Make example for this layout (after setting up your build environment):
 
     make royal_kludge/rk61:vialx
