@@ -2,7 +2,7 @@
 
 Experimental VIAL configuration and improved keymap
 
-<img width="1006" height="290" alt="keyboard-layout" src="layout.png" />
+<img width="1006" height="290" alt="keyboard-layout" src="keyboard-layout-latest.png" />
 
 Layer 0 - Windows<br>
 Layer 1 - Windows navigation/function keys<br>
