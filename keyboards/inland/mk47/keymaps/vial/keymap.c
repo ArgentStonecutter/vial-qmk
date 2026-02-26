@@ -16,24 +16,37 @@
 
 #include QMK_KEYBOARD_H
 
+// Comment KEYMAP_DEFAULT out to get a keymap that makes more sense in terms of the actual keys:
+
+// Bottom row: CTRL, CODE, ALT, HYPER(L5), LOWER(FN1/3), SPACE, RAISE(FN2/3), FN(L4), LEFT, DOWN, RIGHT
+// L1 L2 and L3 are blank for user hacking with the raise/lower keys
+// L4 is the function layer and completes all the standard keys:
+//     ZXCV -> -='` and ,./ -> []\ and the arrow keys map to PgUp, PgDn, Home, End
+// L5 is the media/backlight layer and matches the media keys on the keycaps
+//     ZXCV -> SAT-+ and HUE-+ and Enter -> RGB TOG and HYPER-SPACE is CF_TOGGLE
+
+#define KEYMAP_DEFAULT
+// Fn-space is CF_TOGGLE
+
 enum cf_keycode {
     CF_TOGGLE = QK_KB_0,
 };
 
 // clang-format off
+#ifdef KEYMAP_DEFAULT
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT(
         KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
         KC_TAB, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_UP, KC_SLSH,
-        KC_LCTL, MO(2), KC_LALT, KC_DEL, KC_PGDN, KC_SPC, KC_PGUP, MO(1), KC_LEFT, KC_DOWN, KC_RGHT),
+        KC_LCTL, TL_UPPR, KC_LALT, KC_DEL, KC_PGDN, KC_SPC, KC_PGUP, TL_LOWR, KC_LEFT, KC_DOWN, KC_RGHT),
 
     [1] = LAYOUT(
         KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, RGB_MOD,
         RGB_HUI, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MSEL, KC_MUTE, KC_MPRV, KC_MPLY, KC_MNXT, RGB_VAI, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_VAD, RGB_SPI),
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, CF_TOGGLE, KC_TRNS, KC_TRNS, RGB_SPD, RGB_VAD, RGB_SPI),
 
     [2] = LAYOUT(
         KC_ESC, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC,
@@ -59,6 +72,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______)
 };
+#else
+// This keymap actually matches the bottom row in the default keymaps
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+    [0] = LAYOUT(
+        KC_ESC,  KC_Q,    KC_W,    KC_E,  KC_R,    KC_T,   KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+        KC_TAB,  KC_A,    KC_S,    KC_D,  KC_F,    KC_G,   KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+        KC_LSFT, KC_Z,    KC_X,    KC_C,  KC_V,    KC_B,   KC_N, KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_SLSH,
+        KC_LCTL, KC_LGUI, KC_LALT, MO(5), TL_LOWR, KC_SPC,       TL_UPPR, MO(4),   KC_LEFT, KC_DOWN, KC_RGHT),
+
+    // TL_LOWR/MO13, available
+    [1] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______),
+
+    // TL_UPPR/MO23, available
+    [2] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______),
+
+    // UPPR + LOWR, available
+    [3] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______),
+
+    // layer 4 is the Fn layer
+    [4] = LAYOUT(
+        KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        KC_CAPS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TRNS,
+        KC_TRNS, KC_MINS, KC_EQL,  KC_QUOT, KC_GRV,  KC_TRNS, KC_TRNS, KC_TRNS, KC_LBRC, KC_RBRC, KC_PGUP, KC_BSLS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_END),
+
+    // Hyper: media and backlight
+    [5] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_MOD,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG,
+        _______, RGB_SAD, RGB_SAI, RGB_HUD, RGB_HUI, KC_MSEL, KC_MUTE, KC_MPRV, KC_MPLY, KC_MNXT, RGB_VAI, _______,
+        _______, _______, _______, _______, KC_VOLD, CF_TOGGLE,        KC_VOLU, _______, RGB_SPD, RGB_VAD, RGB_SPI)
+
+};
+#endif
 // clang-format on
 
 #ifdef RGB_MATRIX_ENABLE
