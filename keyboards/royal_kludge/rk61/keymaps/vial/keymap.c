@@ -17,6 +17,7 @@ enum layers {
 
 enum cf_keycode {
     CF_TOGGLE = QK_KB_0,
+    AP_GLOB,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -102,6 +103,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed)
                 cf_magic = !cf_magic;
             return false;
+	case AP_GLOB:
+	    host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
+	    return false;
     }
 
     return true;

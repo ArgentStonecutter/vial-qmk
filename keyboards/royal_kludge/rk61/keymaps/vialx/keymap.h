@@ -12,5 +12,6 @@ enum layers {
 
 enum cf_keycode {
     CF_TOGGLE = QK_KB_0,
+    AP_GLOB,
 };
 
