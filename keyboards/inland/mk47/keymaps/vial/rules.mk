@@ -2,3 +2,5 @@ VIA_ENABLE = yes
 VIAL_ENABLE = yes
 
 VIALRGB_ENABLE = yes
+
+KEYBOARD_SHARED_EP = yes

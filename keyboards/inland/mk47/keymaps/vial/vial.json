@@ -6,6 +6,11 @@
             "name": "CF Toggle",
             "title": "Color Function Toggle",
             "shortName": "CF\nTOGG"
+        },
+        {
+            "name": "Globe",
+            "title": "Apple Globe",
+            "shortName": "GLOBE"
         }
     ],
     "layouts": {
