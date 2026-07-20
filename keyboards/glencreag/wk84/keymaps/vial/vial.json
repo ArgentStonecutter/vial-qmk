@@ -12,6 +12,11 @@
             "name": "CF Toggle",
             "title": "Color Function Toggle",
             "shortName": "CF\nTOGG"
+        },
+        {
+            "name": "Global",
+            "title": "Apple Global/Fn Key",
+            "shortName": "GLOB"
         }
     ],
     "layouts": {
