@@ -105,9 +105,10 @@ void eeconfig_init_user(void) {  // EEPROM is getting reset!
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case CF_TOGGLE:
-            if (record->event.pressed)
+            if (record->event.pressed) {
                 user_config.cf_magic = !user_config.cf_magic;
-            eeconfig_update_user(user_config.raw);
+                eeconfig_update_user(user_config.raw);
+            }
             return false;
         case AP_GLOB:
             host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
