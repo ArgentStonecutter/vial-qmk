@@ -27,6 +27,7 @@ enum __layers {
 
 enum cf_keycode {
     CF_TOGGLE = QK_KB_0,
+    AP_GLOB,
 };
 
 #define KC_TASK LGUI(KC_TAB)
@@ -121,6 +122,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed)
                 user_config.cf_magic = !user_config.cf_magic;
             eeconfig_update_user(user_config.raw);
+            return false;
+        case AP_GLOB:
+            host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
             return false;
     }
 
