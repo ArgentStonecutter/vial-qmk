@@ -14,6 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include QMK_KEYBOARD_H
+
+enum cf_keycode {
+    AP_GLOB = QK_KB_0,
+};
+
 #define MTUP MT(MOD_RSFT,KC_UP)
 #define MTLT MT(MOD_RALT,KC_LEFT)
 #define MTDN MT(MOD_RGUI,KC_DOWN)
@@ -123,6 +128,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_MB);
             }
             return false;
+	case AP_GLOB:
+	    host_consumer_send(record->event.pressed ? AC_NEXT_KEYBOARD_LAYOUT_SELECT : 0);
+	    return false;
     }
     return true;
 }

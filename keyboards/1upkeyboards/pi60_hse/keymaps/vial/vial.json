@@ -5,6 +5,13 @@
         "rows": 6,
         "cols": 14
     },
+    "customKeycodes": [
+        {
+            "name": "Globe",
+            "title": "Apple Globe",
+            "shortName": "GLOBE"
+        }
+    ],
     "layouts": {
         "labels":[
             "Split Backspace",
